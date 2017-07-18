@@ -1,0 +1,22 @@
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './containers/App';
+
+var initialState = {
+  todos: [{
+    id: 0,
+    completed: false,
+    text: 'what to do',
+    status: 'Work incompleted'
+  }]
+}
+
+var store =  require('./stores/index')(initialState);
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);
