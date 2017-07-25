@@ -148,6 +148,19 @@ img {
   border: none;
   border-radius: 5px;
 }
+.btnE{
+  outline: none;
+  margin: 10px 0px 0px 16px;
+  padding: 5px;
+  cursor: pointer;
+  cursor: hand;
+  font-size: medium;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #fff;
+  background:#ff9900;
+  border: none;
+  border-radius: 5px;
+}
 
 .textArea {
   font-family: Verdana, Geneva, Tahoma, sans-serif;

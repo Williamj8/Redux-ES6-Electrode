@@ -6,13 +6,13 @@
 // //   new todo DataTransferItem.
 
 
-var getId = (state) => {
+const getId = (state) => {
   return state.todos.reduce( (maxId, todo)=> {
     return Math.max(todo.id, maxId)
   }, -1) + 1;
 };
 
-var reducer = (state, action)=> {
+const reducer = (state, action)=> {
 
   switch (action.type) {
 
@@ -65,18 +65,20 @@ var reducer = (state, action)=> {
 
      case 'EDIT_TODO':
       console.log(action.id);
-      return Object.assign({}, state, {
+      return {
+        ...state,
         todos: state.todos.map(function (todo) {
           if(todo.id === action.id) {
             var newobj = {l};
             newobj["text"] = "toggle completed";
             return Object.assign({}, todo, newobj);
+            
           }
           else {
             return todo;
           }
         })
-      });
+      };
 
     default:
       return state;

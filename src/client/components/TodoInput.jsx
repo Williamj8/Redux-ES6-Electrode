@@ -42,6 +42,7 @@ class TodoInput extends React.Component {
 
     return (
       <div className={custom.head}>
+      
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"

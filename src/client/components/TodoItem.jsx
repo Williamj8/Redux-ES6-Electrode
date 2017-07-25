@@ -89,7 +89,7 @@ class TodoItem extends React.Component {
           </div>
           <button className={custom.btnB} onClick={this.handleCompleted}>{this.props.todo.status}</button>
           <button className={custom.btnC} onClick={this.handleDelete}>delete</button>
-          <button className={custom.btnC} onClick={this.openModal}>edit</button>
+          <button className={custom.btnE} onClick={this.openModal}>edit</button>
           <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
@@ -102,9 +102,10 @@ class TodoItem extends React.Component {
                 onChange={this.handleChange}
                 style={editStyle}
                 defaultValue={this.props.todo.text} />
-                
+                <br/>
+                <br/>
               <button onClick={this.handleEditingDone.bind(this)}>Save</button>
-              <button onClick={this.closeModal}>close</button>
+              <button onClick={this.closeModal}>Cancel</button>
             </div>
           </Modal>
 
