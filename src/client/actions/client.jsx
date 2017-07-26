@@ -1,17 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import App from '../containers/App';
+import App from './containers/App';
 
-var initialState = {
-  todos: [{
+var todos = (localStorage.getItem('todos')) || [{
     id: 0,
     completed: false,
-    text: 'what to do'
-  }]
-}
+    text: 'what to do',
+    status: 'toggle incompleted'
+  }];
 
-var store = require('../redux/store')(initialState);
+var initialState = todos;
+
+localStorage.setItem('todos', JSON.stringify(initialState.todos))
+
+var store =  require('./stores/index')(initialState);
 
 render(
   <Provider store={store}>

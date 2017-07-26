@@ -4,6 +4,7 @@ import TodoItem from './TodoItem'
 class TodoList extends React.Component {
   constructor(props){
     super(props);
+    console.log(JSON.parse(localStorage.getItem('todos')));
   }
 
   render() {
@@ -12,7 +13,7 @@ class TodoList extends React.Component {
       <div>
         
         {
-          this.props.todos.map(function (todo) {
+          JSON.parse(localStorage.getItem('todos')).map(function (todo) {
             return (
               <TodoItem 
                 key={todo.id} 

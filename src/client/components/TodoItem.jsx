@@ -46,6 +46,7 @@ class TodoItem extends React.Component {
     //if(event.keyCode === 13){//submit
     this.props.todo.text = this.state.inputText;
     this.setState({ editing: false });
+    this.props.editTodo(this.props.todo.id, this.state.inputText);
     //}
   }
 

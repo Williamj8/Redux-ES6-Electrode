@@ -6,83 +6,85 @@
 // //   new todo DataTransferItem.
 
 
-const getId = (state) => {
-  return state.todos.reduce( (maxId, todo)=> {
+var getId = function (state) {
+  console.log("getid:", localStorage.getItem('todos'));
+  return JSON.parse(localStorage.getItem('todos')).reduce(function (maxId, todo) {
     return Math.max(todo.id, maxId)
   }, -1) + 1;
 };
 
-const reducer = (state, action)=> {
-
+var reducer = function (state, action) {
+  
   switch (action.type) {
 
     case 'ADD_TODO':
-      return {
-        ...state,
+      var todos_obj = Object.assign({}, state, {
         todos: [{
           id: getId(state),
           completed: false,
           text: action.text,
-          status: "Work incompleted"
-        }, ...state.todos]
-      };
-
-
+          status: "toggle incompleted"
+        }, ...JSON.parse(localStorage.getItem('todos'))]});
+      console.log("ADD_TODO:",JSON.stringify(todos_obj));
+      localStorage.setItem('todos', JSON.stringify(todos_obj.todos));
+      return todos_obj;
+      
 
     case 'DELETE_TODO':
-
-      return {
-        ...state,
-        todos: state.todos.filter( (todo)=> {
+      var todos_obj= Object.assign({}, state, {
+        todos: JSON.parse(localStorage.getItem('todos'))
+        .filter(function (todo) {
           return todo.id !== action.id
         })
-      };
+      });
+      localStorage.setItem('todos', JSON.stringify(todos_obj.todos));
+      return todos_obj;
+      
 
-
+    case 'EDIT_TODO':
+      console.log(action.id);
+      console.log(action.text);
+      var todos_obj = Object.assign({}, state, {
+        todos: state.todos.map(function (todo) {
+          if(todo.id === action.id) {
+            var newobj = {};
+            newobj["text"] = action.text;
+            return Object.assign({}, todo, newobj);
+          }
+          else {
+            return todo;
+          }
+        })
+      });
+      console.log(todos_obj);
+      localStorage.setItem('todos', JSON.stringify(todos_obj.todos));
+      return todos_obj;
 
     case 'COMPLETE_TODO':
       console.log(action.id);
-      return {
-        ...state,
-        todos: state.todos.map((todo) => {
-          if (todo.id === action.id) {
-            var newobj = { completed: !todo.completed };
-            if (todo.status == "Work incompleted") {
-              newobj["status"] = "Work completed";
-            }
-            else {
-              newobj["status"] = "Work incompleted";
-            }
-            return Object.assign({}, todo, newobj);
-          }
-          else {
-            return todo;
-          }
-        })
-      };
-
-
-
-     case 'EDIT_TODO':
-      console.log(action.id);
-      return {
-        ...state,
+      var todos_obj =Object.assign({}, state, {
         todos: state.todos.map(function (todo) {
-          if(todo.id === action.id) {
-            var newobj = {l};
-            newobj["text"] = "toggle completed";
+          if(todo.id === action.id){
+            var newobj = {completed: !todo.completed};           
+            if(todo.status == "toggle incompleted") {
+              newobj["status"] = "toggle completed";
+            }
+            else{
+              newobj["status"] = "toggle incompleted";
+            }
             return Object.assign({}, todo, newobj);
-            
-          }
+         }
           else {
             return todo;
           }
         })
-      };
+      });
+      localStorage.setItem('todos', JSON.stringify(todos_obj.todos));
+      return todos_obj;
 
-    default:
+    default: 
       return state;
   }
 };
 
-export default reducer;
+module.exports = reducer;

@@ -7,11 +7,12 @@ var actions = {
     };
   },
 
-  editTodo: function (id) {
+  editTodo: function (id, data) {
     return {
       type: 'EDIT_TODO',
       modalType: 'DELETE_POST',
-      id: id
+      id: id,
+      text: data
     };
   },
     

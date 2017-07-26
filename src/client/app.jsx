@@ -3,14 +3,18 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './containers/App';
 
-var initialState = {
-  todos: [{
+var todos = JSON.parse(localStorage.getItem('todos')) || [{
     id: 0,
     completed: false,
     text: 'what to do',
-    status: 'Work incompleted'
-  }]
+    status: 'toggle incompleted'
+  }];
+
+var initialState = {
+  todos
 }
+
+localStorage.setItem('todos', JSON.stringify(initialState.todos))
 
 var store =  require('./stores/index')(initialState);
 
