@@ -1,18 +1,18 @@
-# new-nnnrrr [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# new-noder [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > 
 
 ## Installation
 
 ```sh
-$ npm install --save new-nnnrrr
+$ npm install --save new-noder
 ```
 
 ## Usage
 
 ```js
-var newNnnrrr = require('new-nnnrrr');
+var noder = require('new-noder');
 
-newNnnrrr('Rainbow');
+newnoder'Rainbow');
 ```
 ## License
 
